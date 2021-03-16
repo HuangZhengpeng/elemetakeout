@@ -146,7 +146,7 @@ export default {
         el: ".swiper-pagination",
       },
     });
-    // axios.get("http://localhost:4000/position/"+this.geohash[0]+","+this.geohash[1]).then((a)=>{console.log(a);})
+    axios.get("http://localhost:4000/position/"+this.geohash[0]+","+this.geohash[1]).then((a)=>{console.log(a);})
     axios.get("http://localhost:4000/index_category").then((response)=>{
       console.log(response);
     })
