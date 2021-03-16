@@ -1,14 +1,15 @@
 <template>
   <section class="search">
     <header-top title="搜索"></header-top>
-    <form class="search_form" action="#">
+    <form class="search_form" action="javascript:;">
       <input
         type="search"
         name="search"
         placeholder="请输入商家或美食名称"
         class="search_input"
+        v-model="keyword"
       />
-      <input type="submit" class="search_submit" />
+      <input type="submit" class="search_submit" @click="getsearch"/>
     </form>
   </section>
 </template>
@@ -16,6 +17,16 @@
 import HeaderTop from "../../components/HeaderTop/HeaderTop.vue";
 export default {
   components: { HeaderTop },
+  data(){
+    return{
+      keyword:"",
+    }
+  },
+  methods:{
+    getsearch(){
+      this.$store.dispatch("getsearch",this.keyword)
+    }
+  }
 };
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
