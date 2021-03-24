@@ -4,7 +4,7 @@
 */
 import ajax from './ajax'
 
-const BASE = '/api'
+const BASE = '/api'//仅在开发的时候代理，打包的时候写空字符串就可以
 
 //1. 根据经纬度获取位置详情
 export const reqAddress = (longitude, latitude) => ajax.get(
@@ -46,7 +46,7 @@ export const reqSearch_shops = (latitude, longitude, keyword) => ajax({
 
 //6. 用户名密码登陆
 export const reqLogin_pwd = ({name, pwd, captcha}) => {
-    console.log(name,pwd, captcha);
+    // console.log(name,pwd, captcha);
     return ajax({
         method: 'POST',
         url: BASE + '/login_pwd',
@@ -71,6 +71,9 @@ export const reqLogin_sms=(phone,code)=>ajax({
 export const reqUserinfo=()=>ajax({
     method:"GET",
     url:BASE+"/userinfo",
+    headers: {
+        needToken: true
+    }
 })
 
 //10. 登出404
@@ -79,33 +82,9 @@ export const reqLogout=()=>ajax.get(BASE+'/logout')
 //测试post
 export const reqtest=(name, pwd)=>ajax.post(BASE+"/test_post",{name, pwd})
 
-// import ajax from "./ajax";
-// const BASE="/api"
-// export const reqAddress=({longitude, latitude})=>{
-//     return ajax(BASE+"/position/"+latitude+","+longitude)
-// };
+//mock数据
+export const reqGoods=()=>ajax('/goods').then(response=>response)
 
-// export const reqCategorys=()=>{
-//     return ajax(BASE+"/index_category")
-// };
+export const reqRatings=()=>ajax('/ratings').then(response=>response)
 
-// export const reqShops=({longitude, latitude})=>{
-//     return ajax(BASE+"/shops",{latitude, longitude})
-// }
-
-// //验证码
-// export const reqCaptcha=()=>{
-//     return ajax(BASE+"/captcha")
-// };
-// //密码登录
-// export const reqLoginpwd=({name, pwd, captcha})=>{
-//     return ajax(BASE+"/login_pwd",{name, pwd, captcha}, "post")
-// };
-
-// //测试
-// export const reqtest=({name, pwd})=>{
-//     return ajax(BASE+"/test_post",{name, pwd}, "post")
-// };
-// export const reqtest0=({name, pwd})=>{
-//     return ajax(BASE+"/test_get",{name, pwd}, "get")
-// };
+export const reqInfo=()=>ajax('/info').then(response=>response)

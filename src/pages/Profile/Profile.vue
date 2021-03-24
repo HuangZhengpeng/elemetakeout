@@ -107,6 +107,7 @@
 import HeaderTop from "../../components/HeaderTop/HeaderTop.vue";
 import { mapState } from "vuex";
 import { MessageBox } from "mint-ui";
+import { reqLogout } from "../../api";
 export default {
   computed: {
     ...mapState(["user"]),

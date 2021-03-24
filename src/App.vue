@@ -1,8 +1,9 @@
 <template>
   <div>
-    <keep-alive>
-      <router-view />
-    </keep-alive>
+    <router-view />
+    <!-- <keep-alive>
+      
+    </keep-alive> -->
     <footer-guide v-show="$route.meta.showFooter" />
   </div>
 </template>
@@ -13,7 +14,7 @@ export default {
   components: { FooterGuide },
   mounted() {
     this.$store.dispatch("getaddress");
-    this.$store.dispatch("getUserinfo");
+    // this.$store.dispatch("getUserinfo");
     // let captch = await reqCaptcha()
     // console.log(captch);
     // let rlog=await reqtest("aaa","123")

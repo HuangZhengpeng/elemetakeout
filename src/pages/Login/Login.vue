@@ -114,7 +114,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { reqLogin_pwd, reqLogin_sms, reqSendcode, reqLogout } from "../../api";
+import { reqLogin_pwd, reqLogin_sms, reqSendcode, reqUserinfo } from "../../api";
 import { MessageBox } from "mint-ui";
 
 // Vue.use(MessageBox)
@@ -136,7 +136,7 @@ export default {
   computed: {
     ...mapState(["user"]),
     phoneOk() {
-      console.log("test");
+      // console.log("test");
       let phone = this.phone;
       // let timecount = this.timecount;
       let reg = /^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/;
@@ -191,7 +191,7 @@ export default {
         pwd: this.pwd,
         captcha: this.captcha,
       });
-      console.log(req.data);
+      // console.log(req.data);
       if (req.code == 0) {
         this.inint_afterlogin(req.data);
       } else {
@@ -238,6 +238,7 @@ export default {
 
     //登陆以后，记录token，更新foodCategorys,shops
     inint_afterlogin(user) {
+      // this.reqUserinfo()
       // this.$store.dispatch("updateToken", token);
       this.$store.dispatch("recorduser", user);
       this.$store.dispatch("getcategorys");
@@ -249,9 +250,9 @@ export default {
       this.$refs.captcha.src =
         "http://localhost:4000/captcha?time=" + Date.now();
     },
-    //登出
-    async logout() {
-      let req = await reqLogout();
+    //获得用户信息
+    async reqUserinfo() {
+      let req = await reqUserinfo();
       console.log(req);
     },
   },

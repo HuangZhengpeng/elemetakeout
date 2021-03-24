@@ -5,5 +5,8 @@ export default {
     foodCategorys:[],
     shops:[],
     imgbase:"https://fuss10.elemecdn.com",
-    user:{}
+    user:{},
+    info:{},
+    goods:[],
+    ratings:[],
 }

@@ -3,15 +3,22 @@ import {
     reqCategorys,
     reqShops,
     reqSearch_shops,
-    reqUserinfo
+    reqUserinfo,
+    reqGoods,
+    reqInfo,
+    reqRatings
 } from "../api"
 import {
     RECIVE_ADDRESS,
     RECIVE_CATEGORYS,
     RECIVE_SHOPS,
-    // RECIVE_TOKEN,
     RECIVE_USER,
-    // RECIVE_CAPTCHA,
+    RECIVE_GOODS,
+    RECIVE_INFO,
+    RECIVE_RATINGS,
+    DECREASE_COUNT,
+    INCREASE_COUNT,
+    CLEAR_CART,
 } from "./mutations-types"
 export default {
     //得到地址，然后通过mutations控制state中的address
@@ -49,7 +56,50 @@ export default {
     async getUserinfo(){
         const Userinfo= await reqUserinfo()
         console.log(Userinfo);
-    }
+    },
     //登出貌似也404了
+
+    //请求得到goods,通过mutations改变state中的shop.goods
+    // getGoods({commit}){
+    //     reqGoods().then((result)=>{
+    //         commit(RECIVE_GOODS,{goods:result.data})
+    //     });
+    // },
+    async getGoods({commit}){
+        const req= await reqGoods()
+        commit(RECIVE_GOODS,{goods:req.data})
+    },
+    //请求得到info,通过mutations改变state中的shop.info
+    // getInfo({commit}){
+    //     reqInfo().then((result)=>{
+    //         commit(RECIVE_INFO,{info:result.data})
+    //     });
+    // },
+    async getInfo({commit}){
+        const req= await reqInfo()
+        commit(RECIVE_INFO,{info:req.data})
+    },
+    //请求得到ratings,通过mutations改变state中的shop.ratings
+    // getRatings({commit}){
+    //     reqRatings().then((result)=>{
+    //         commit(RECIVE_RATINGS,{ratings:result.data})
+    //     });
+    // },
+    async getRatings({commit}){
+        const req= await reqRatings()
+        commit(RECIVE_RATINGS,{ratings:req.data})
+    },
+
+    update_count({commit},{isAdd,food}){
+        if(isAdd){
+            commit(INCREASE_COUNT,{food})
+        }else{
+            commit(DECREASE_COUNT,{food})
+        }
+    },
+
+    clearcart({commit},cartfoods){
+        commit(CLEAR_CART, {cartfoods})
+    }
 
 }

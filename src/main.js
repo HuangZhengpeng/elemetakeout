@@ -2,10 +2,9 @@ import Vue from 'vue'
 import App from './App'
 import router from "./router"
 import store from "./store"
-// Vue.config.productionTip = false
 import { Button } from "mint-ui";
-// Vue.component(MessageBox.name, MessageBox);
-Vue.component(Button.name, Button);//mt-button
+Vue.component(Button.name, Button);//全局添加mt-button标签
+import "./mock/mockServer"//引入即可，文件中没有向外暴露任何东西
 
 /* eslint-disable no-new */
 new Vue({
